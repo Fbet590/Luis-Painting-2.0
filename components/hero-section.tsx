@@ -1,4 +1,4 @@
-import { Star, Shield, Clock, CheckCircle2 } from "lucide-react"
+import { Star, Shield, CheckCircle2 } from "lucide-react"
 import { MultiStepForm } from "@/components/multi-step-form"
 
 export function HeroSection() {
@@ -29,7 +29,7 @@ export function HeroSection() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-serif font-bold text-[40px] leading-tight mb-4 text-balance">
+            <h1 className="font-serif font-bold text-[50px] sm:text-[40px] leading-tight mb-4 text-balance">
               Kitchen Cabinets Repainted For $2,000.<br />
               <span className="text-accent">Not $20,000.</span>
             </h1>
@@ -39,7 +39,7 @@ export function HeroSection() {
             </p>
 
             {/* Quick Benefits */}
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-8">
               {[
                 "Clear, Upfront Pricing",
                 "Proven Expertise",
@@ -51,11 +51,6 @@ export function HeroSection() {
                 </span>
               ))}
             </div>
-
-            <p className="text-card/70 text-sm flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              Projects completed in 2-5 days
-            </p>
           </div>
 
           {/* Right Form - Multi-step */}
