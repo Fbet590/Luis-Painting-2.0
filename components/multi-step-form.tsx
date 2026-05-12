@@ -124,7 +124,7 @@ export function MultiStepForm() {
       {/* Header */}
       <div className="text-center mb-6">
         <h2 className="font-serif font-bold text-[calc(1.25rem+4px)] sm:text-[calc(1.5rem+4px)] text-card-foreground mb-3">
-          See If Your Kitchen Qualifies For The $2,000 Repaint Package
+          See If Your Kitchen Qualifies For The <span className="text-accent">$2,000 Repaint Package</span>
         </h2>
         <div className="w-full h-px bg-border mb-3" />
         <p className="text-muted-foreground text-sm leading-relaxed">

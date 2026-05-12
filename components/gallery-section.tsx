@@ -1,7 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
 const galleryImages = [
   {
@@ -19,8 +22,24 @@ const galleryImages = [
 ]
 
 export function GallerySection() {
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+
   const scrollToForm = () => {
     document.getElementById('estimate')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const openLightbox = (index: number) => {
+    setCurrentIndex(index)
+    setLightboxOpen(true)
+  }
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1))
+  }
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1))
   }
 
   return (
@@ -42,10 +61,11 @@ export function GallerySection() {
 
         {/* Gallery Grid */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {galleryImages.map((item) => (
-            <div 
+          {galleryImages.map((item, index) => (
+            <button 
               key={item.category}
-              className="group relative overflow-hidden rounded-2xl"
+              onClick={() => openLightbox(index)}
+              className="group relative overflow-hidden rounded-2xl cursor-pointer text-left"
             >
               <div className="relative aspect-[4/3]">
                 <Image
@@ -60,7 +80,7 @@ export function GallerySection() {
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/80 to-transparent p-6">
                 <h3 className="text-card font-semibold text-lg">{item.category}</h3>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
@@ -75,6 +95,68 @@ export function GallerySection() {
           </Button>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogContent className="max-w-5xl w-[95vw] p-0 bg-black/95 border-none">
+          <div className="relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setLightboxOpen(false)}
+              className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              aria-label="Close lightbox"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+
+            {/* Image Container */}
+            <div className="relative aspect-[4/3] w-full">
+              <Image
+                src={galleryImages[currentIndex].image}
+                alt={galleryImages[currentIndex].category}
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={goToPrevious}
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-8 h-8 text-white" />
+            </button>
+            <button
+              onClick={goToNext}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-8 h-8 text-white" />
+            </button>
+
+            {/* Caption and Indicators */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+              <h3 className="text-white font-semibold text-xl text-center mb-4">
+                {galleryImages[currentIndex].category}
+              </h3>
+              <div className="flex justify-center gap-2">
+                {galleryImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      index === currentIndex ? "bg-accent" : "bg-white/40 hover:bg-white/60"
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   )
 }
