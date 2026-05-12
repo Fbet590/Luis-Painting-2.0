@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     console.log("[v0] Received form data:", body)
     
     const webhookResponse = await fetch(
-      "https://services.leadconnectorhq.com/hooks/sTrbD95zmguyI0X5YZS4/webhook-trigger/0fc3f89e-73a9-4665-a6e5-3cb3c7285f7e",
+      "https://services.leadconnectorhq.com/hooks/sTrbD95zmguyI0X5YZS4/webhook-trigger/z36Jvv5YFs4a7jAIwBSm",
       {
         method: "POST",
         headers: {
