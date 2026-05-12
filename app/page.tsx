@@ -1,8 +1,7 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { TrustBadges } from "@/components/trust-badges"
-import { ServicesSection } from "@/components/services-section"
-import { WhyChooseUs } from "@/components/why-choose-us"
+
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { GallerySection } from "@/components/gallery-section"
 import { FaqSection } from "@/components/faq-section"
@@ -17,12 +16,6 @@ export default function Home() {
         <HeroSection />
       </div>
       <TrustBadges />
-      <div id="services">
-        <ServicesSection />
-      </div>
-      <div id="why-us">
-        <WhyChooseUs />
-      </div>
       <div id="reviews">
         <TestimonialsSection />
       </div>
