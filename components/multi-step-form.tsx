@@ -122,12 +122,12 @@ export function MultiStepForm() {
   return (
     <div className="bg-card rounded-2xl p-6 sm:p-8 shadow-2xl">
       {/* Header */}
-      <div className="text-center mb-6">
-        <h2 className="font-serif font-bold text-[calc(1.25rem+4px)] sm:text-[calc(1.5rem+4px)] text-card-foreground mb-3">
+      <div className="text-center mb-4">
+        <h2 className="font-serif font-bold text-[calc(1.25rem+9px)] sm:text-[calc(1.5rem+4px)] text-card-foreground mb-3">
           See If Your Kitchen Qualifies For The <span className="text-accent">$2,000 Repaint Package</span>
         </h2>
         <div className="w-full h-px bg-border mb-3" />
-        <p className="text-muted-foreground text-sm leading-relaxed">
+        <p className="text-muted-foreground text-base sm:text-sm leading-relaxed">
           Every kitchen is different. Some don&apos;t qualify — but most do! Fill out our 17-second form. No Commitment.
         </p>
         <p className="text-muted-foreground text-xs mt-2">
@@ -144,7 +144,7 @@ export function MultiStepForm() {
       </div>
 
       {/* Step Content */}
-      <div className="min-h-[200px]">
+      <div className="min-h-[140px]">
         {/* Step 1: Name */}
         {currentStep === 1 && (
           <div className="space-y-4">
@@ -198,7 +198,7 @@ export function MultiStepForm() {
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center mt-8 pt-6 border-t border-border">
+      <div className="flex justify-between items-center mt-4 pt-4 border-t border-border">
         <Button
           variant="ghost"
           onClick={handlePrev}
