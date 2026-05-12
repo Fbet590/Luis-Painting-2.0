@@ -30,13 +30,12 @@ export function HeroSection() {
 
             {/* Main Headline */}
             <h1 className="font-serif font-bold text-[40px] leading-tight mb-4 text-balance">
-              Give Your Home a Fresh Look<br />
-              <span className="text-accent">That Lasts for Years</span>
+              Kitchen Cabinets Repainted For $2,000.<br />
+              <span className="text-accent">Not $20,000.</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-card/90 mb-6 max-w-xl leading-relaxed">
-              High-quality paint. Stress-free experience. Interior, exterior, and cabinet 
-              refinishing services from Luis Painting LLC.
+              High-quality paint. Stress-free experience.
             </p>
 
             {/* Quick Benefits */}
