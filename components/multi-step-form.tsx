@@ -27,6 +27,49 @@ const steps = [
   { id: 3, title: "Phone" },
 ]
 
+// Email validation - checks for valid format and blocks common fake/temporary email domains
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+  if (!emailRegex.test(email)) return false
+  
+  // Block common fake/temporary email domains
+  const blockedDomains = [
+    'tempmail.com', 'throwaway.com', 'fakeinbox.com', 'mailinator.com',
+    'guerrillamail.com', 'sharklasers.com', '10minutemail.com', 'trashmail.com',
+    'yopmail.com', 'getnada.com', 'temp-mail.org', 'dispostable.com',
+    'maildrop.cc', 'mohmal.com', 'emailondeck.com', 'tempail.com',
+    'test.com', 'example.com', 'fake.com', 'asdf.com', 'qwerty.com'
+  ]
+  
+  const domain = email.split('@')[1]?.toLowerCase()
+  if (blockedDomains.includes(domain)) return false
+  
+  return true
+}
+
+// Phone validation - must be at least 10 digits (US format)
+const isValidPhone = (phone: string): boolean => {
+  // Remove all non-digit characters
+  const digitsOnly = phone.replace(/\D/g, '')
+  
+  // Must have at least 10 digits for US phone numbers
+  if (digitsOnly.length < 10) return false
+  
+  // Block obvious fake patterns
+  const fakePatterns = [
+    '0000000000', '1111111111', '2222222222', '3333333333', '4444444444',
+    '5555555555', '6666666666', '7777777777', '8888888888', '9999999999',
+    '1234567890', '0987654321', '1234512345', '5555551234', '0000000001'
+  ]
+  
+  if (fakePatterns.includes(digitsOnly) || fakePatterns.includes(digitsOnly.slice(-10))) return false
+  
+  // Block numbers starting with 0 or 1 (invalid US area codes)
+  if (digitsOnly.length === 10 && (digitsOnly[0] === '0' || digitsOnly[0] === '1')) return false
+  
+  return true
+}
+
 
 
 export function MultiStepForm() {
@@ -93,9 +136,9 @@ export function MultiStepForm() {
 
   const canProceed = () => {
     switch (currentStep) {
-      case 1: return formData.name.trim() !== ""
-      case 2: return formData.email.trim() !== "" && formData.email.includes("@")
-      case 3: return formData.phone.trim() !== ""
+      case 1: return formData.name.trim() !== "" && formData.name.trim().length >= 2
+      case 2: return isValidEmail(formData.email.trim())
+      case 3: return isValidPhone(formData.phone)
       default: return false
     }
   }
@@ -113,7 +156,7 @@ export function MultiStepForm() {
           We&apos;ve received your request.
         </p>
         <p className="text-muted-foreground">
-          A member of our team will contact you within 24 hours to discuss your {formData.service === "cabinet" ? "cabinet refinishing" : formData.service === "exterior" ? "exterior painting" : "interior painting"} project.
+          A member of our team will contact you within a couple mins so keep an eye out!
         </p>
       </div>
     )
