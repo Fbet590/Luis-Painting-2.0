@@ -1,30 +1,24 @@
 "use client"
 
-import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
-const transformations = [
+const galleryImages = [
   {
-    category: "Cabinet Refinishing",
-    before: "/images/gallery/cabinet-before.jpg",
-    after: "/images/gallery/cabinet-after.jpg",
+    category: "Dark Cabinet Refinishing",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fredibetancourth_Realistic_modern_kitchen_interior_in_a_middle-_6381401c-9a3c-4e12-b21e-8b8f4982f016-2DtUNTjGoeBDuTKKkjFRpOwhKiwn6n.png",
   },
   {
-    category: "Interior Painting",
-    before: "/images/gallery/interior-before.jpg",
-    after: "/images/gallery/interior-after.jpg",
+    category: "Light Gray Cabinets",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/fredibetancourth_Realistic_modern_kitchen_interior_in_a_small_c_44862917-2ed6-4f94-a134-ecd6e684a957-OMHycb2oyuhV6RtkHDRQqwcTaaMab8.png",
   },
   {
-    category: "Exterior Painting",
-    before: "/images/gallery/exterior-before.jpg",
-    after: "/images/gallery/exterior-after.jpg",
+    category: "Cream Cabinet Finish",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Dec%2030%2C%202025%20at%2004_26_59%20PM-DTcgp24OAKWl654YFxhKQ8zGPZMy4l.png",
   }
 ]
 
 export function GallerySection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-
   const scrollToForm = () => {
     document.getElementById('estimate')?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -48,43 +42,23 @@ export function GallerySection() {
 
         {/* Gallery Grid */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {transformations.map((item, index) => (
+          {galleryImages.map((item) => (
             <div 
               key={item.category}
-              className="group relative overflow-hidden rounded-2xl cursor-pointer"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              className="group relative overflow-hidden rounded-2xl"
             >
-              {/* Before Image (default) */}
-              <div className={`relative aspect-[4/3] transition-opacity duration-500 ${hoveredIndex === index ? 'opacity-0' : 'opacity-100'}`}>
+              <div className="relative aspect-[4/3]">
                 <Image
-                  src={item.before}
-                  alt={`${item.category} - Before`}
+                  src={item.image}
+                  alt={item.category}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute top-4 left-4 bg-foreground/80 text-background px-3 py-1 rounded-full text-sm font-medium">
-                  Before
-                </div>
-              </div>
-              
-              {/* After Image (on hover) */}
-              <div className={`absolute inset-0 transition-opacity duration-500 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`}>
-                <Image
-                  src={item.after}
-                  alt={`${item.category} - After`}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute top-4 left-4 bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium">
-                  After
-                </div>
               </div>
 
               {/* Overlay with category */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/80 to-transparent p-6">
                 <h3 className="text-card font-semibold text-lg">{item.category}</h3>
-                <p className="text-card/80 text-sm">Hover to see the transformation</p>
               </div>
             </div>
           ))}

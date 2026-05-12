@@ -1,10 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight, CheckCircle2, Home, Paintbrush, CookingPot } from "lucide-react"
+import { ChevronLeft, ChevronRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
 
 declare global {
   interface Window {
@@ -22,31 +21,12 @@ interface FormData {
 }
 
 const steps = [
-  { id: 1, title: "Service Type" },
-  { id: 2, title: "Budget" },
-  { id: 3, title: "Flexibility" },
-  { id: 4, title: "Name" },
-  { id: 5, title: "Email" },
-  { id: 6, title: "Phone" },
+  { id: 1, title: "Name" },
+  { id: 2, title: "Email" },
+  { id: 3, title: "Phone" },
 ]
 
-const serviceOptions = [
-  { value: "cabinet", label: "Refinishing / Repainting Kitchen Cabinets", icon: CookingPot },
-  { value: "exterior", label: "Exterior Painting", icon: Home },
-  { value: "interior", label: "Interior Painting", icon: Paintbrush },
-]
 
-const budgetOptions = [
-  { value: "1000-2000", label: "$1,000 - $2,000" },
-  { value: "2000-4000", label: "$2,000 - $4,000" },
-  { value: "4000+", label: "$4,000 +" },
-]
-
-const flexibilityOptions = [
-  { value: "yes", label: "Yes, I prefer premium quality even if the cost increases slightly" },
-  { value: "maybe", label: "Maybe, depends on the options presented" },
-  { value: "no", label: "No, I have a fixed budget" },
-]
 
 export function MultiStepForm() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -112,12 +92,9 @@ export function MultiStepForm() {
 
   const canProceed = () => {
     switch (currentStep) {
-      case 1: return formData.service !== ""
-      case 2: return formData.budget !== ""
-      case 3: return formData.flexibility !== ""
-      case 4: return formData.name.trim() !== ""
-      case 5: return formData.email.trim() !== "" && formData.email.includes("@")
-      case 6: return formData.phone.trim() !== ""
+      case 1: return formData.name.trim() !== ""
+      case 2: return formData.email.trim() !== "" && formData.email.includes("@")
+      case 3: return formData.phone.trim() !== ""
       default: return false
     }
   }
@@ -150,7 +127,7 @@ export function MultiStepForm() {
         </h2>
         <div className="w-full h-px bg-border mb-3" />
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Every kitchen is different. Some don&apos;t qualify for our $2,000 flat repaint — but most do. Fill out our 17-second form. No Commitment
+          Every kitchen is different. Some don&apos;t qualify — but most do! Fill out our 17-second form. No Commitment.
         </p>
         <p className="text-muted-foreground text-xs mt-2">
           Step {currentStep} of {steps.length}
@@ -166,93 +143,9 @@ export function MultiStepForm() {
       </div>
 
       {/* Step Content */}
-      <div className="min-h-[280px]">
-        {/* Step 1: Service Type */}
+      <div className="min-h-[200px]">
+        {/* Step 1: Name */}
         {currentStep === 1 && (
-          <div className="space-y-4">
-            <p className="text-card-foreground font-medium text-lg text-center mb-6">
-              What kind of painting service are you looking for?
-            </p>
-            <div className="space-y-3">
-              {serviceOptions.map((option) => {
-                const Icon = option.icon
-                return (
-                  <button
-                    key={option.value}
-                    onClick={() => setFormData({ ...formData, service: option.value })}
-                    className={cn(
-                      "w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left",
-                      formData.service === option.value
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/50 hover:bg-muted/50"
-                    )}
-                  >
-                    <div className={cn(
-                      "w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0",
-                      formData.service === option.value ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-                    )}>
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <span className="font-medium text-card-foreground">{option.label}</span>
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Step 2: Budget */}
-        {currentStep === 2 && (
-          <div className="space-y-4">
-            <p className="text-card-foreground font-medium text-lg text-center mb-6">
-              What&apos;s your approximate budget for this project?
-            </p>
-            <div className="space-y-3">
-              {budgetOptions.map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => setFormData({ ...formData, budget: option.value })}
-                  className={cn(
-                    "w-full p-4 rounded-xl border-2 transition-all text-center font-medium",
-                    formData.budget === option.value
-                      ? "border-primary bg-primary/5 text-card-foreground"
-                      : "border-border hover:border-primary/50 hover:bg-muted/50 text-card-foreground"
-                  )}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Step 3: Flexibility */}
-        {currentStep === 3 && (
-          <div className="space-y-4">
-            <p className="text-card-foreground font-medium text-lg text-center mb-6">
-              Are you flexible with your budget?
-            </p>
-            <div className="space-y-3">
-              {flexibilityOptions.map((option) => (
-                <button
-                  key={option.value}
-                  onClick={() => setFormData({ ...formData, flexibility: option.value })}
-                  className={cn(
-                    "w-full p-4 rounded-xl border-2 transition-all text-left font-medium",
-                    formData.flexibility === option.value
-                      ? "border-primary bg-primary/5 text-card-foreground"
-                      : "border-border hover:border-primary/50 hover:bg-muted/50 text-card-foreground"
-                  )}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Step 4: Name */}
-        {currentStep === 4 && (
           <div className="space-y-4">
             <p className="text-card-foreground font-medium text-lg text-center mb-6">
               Enter your name:
@@ -268,8 +161,8 @@ export function MultiStepForm() {
           </div>
         )}
 
-        {/* Step 5: Email */}
-        {currentStep === 5 && (
+        {/* Step 2: Email */}
+        {currentStep === 2 && (
           <div className="space-y-4">
             <p className="text-card-foreground font-medium text-lg text-center mb-6">
               What&apos;s your email address?
@@ -285,8 +178,8 @@ export function MultiStepForm() {
           </div>
         )}
 
-        {/* Step 6: Phone */}
-        {currentStep === 6 && (
+        {/* Step 3: Phone */}
+        {currentStep === 3 && (
           <div className="space-y-4">
             <p className="text-card-foreground font-medium text-lg text-center mb-6">
               What&apos;s the best mobile number to reach you on?
