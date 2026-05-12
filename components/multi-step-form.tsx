@@ -145,10 +145,14 @@ export function MultiStepForm() {
     <div className="bg-card rounded-2xl p-6 sm:p-8 shadow-2xl">
       {/* Header */}
       <div className="text-center mb-6">
-        <h2 className="font-serif font-bold text-[calc(1.5rem+4px)] sm:text-[calc(1.875rem+4px)] text-card-foreground mb-2">
-          Get Your Free Quote
+        <h2 className="font-serif font-bold text-[calc(1.25rem+4px)] sm:text-[calc(1.5rem+4px)] text-card-foreground mb-3">
+          See If Your Kitchen Qualifies For The $2,000 Repaint Package
         </h2>
-        <p className="text-muted-foreground text-sm">
+        <div className="w-full h-px bg-border mb-3" />
+        <p className="text-muted-foreground text-sm leading-relaxed">
+          Every kitchen is different. Some don&apos;t qualify for our $2,000 flat repaint — but most do. Fill out our 17-second form. No Commitment
+        </p>
+        <p className="text-muted-foreground text-xs mt-2">
           Step {currentStep} of {steps.length}
         </p>
       </div>
