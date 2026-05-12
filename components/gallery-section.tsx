@@ -18,6 +18,14 @@ const galleryImages = [
   {
     category: "Cream Cabinet Finish",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ChatGPT%20Image%20Dec%2030%2C%202025%20at%2004_26_59%20PM-DTcgp24OAKWl654YFxhKQ8zGPZMy4l.png",
+  },
+  {
+    category: "White Pantry Cabinets",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_oc8o2boc8o2boc8o.png-U7XjWhOPgwgAg0Nhg9vE8XjtH20Jda.jpeg",
+  },
+  {
+    category: "Cream Kitchen Cabinets",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Gemini_Generated_Image_7cjcur7cjcur7cjc.png-t9jSH4dyLjQ6njm0ondFQuFee0hHth.jpeg",
   }
 ]
 
